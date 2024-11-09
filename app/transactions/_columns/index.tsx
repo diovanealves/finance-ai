@@ -5,6 +5,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { EditIcon, TrashIcon } from "lucide-react";
 
 import { Button } from "@/app/_components/ui/button";
+import {
+  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_PAYMENT_METHOD_LABELS,
+} from "@/app/_constants/transactions";
 import TransactionTypeBadge from "../_components/type-badge";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
@@ -16,16 +20,20 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "type",
     header: "Tipo",
     cell: ({ row: { original: transaction } }) => {
-      return <TransactionTypeBadge transactionType={transaction.type} />;
+      <TransactionTypeBadge transactionType={transaction.type} />;
     },
   },
   {
     accessorKey: "category",
     header: "Categoria",
+    cell: ({ row: { original: transaction } }) =>
+      TRANSACTION_CATEGORY_LABELS[transaction.category],
   },
   {
     accessorKey: "paymentMethod",
     header: "Método de pagamento",
+    cell: ({ row: { original: transaction } }) =>
+      TRANSACTION_PAYMENT_METHOD_LABELS[transaction.paymentMethod],
   },
   {
     accessorKey: "date",
