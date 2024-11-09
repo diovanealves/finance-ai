@@ -6,6 +6,7 @@ import { db } from "../_lib/prisma";
 
 export default async function TransactionsPage() {
   const transactions = await db.transaction.findMany({});
+  const serializedTransactions = JSON.parse(JSON.stringify(transactions));
 
   return (
     <div className="space-y-6 p-6">
@@ -14,7 +15,7 @@ export default async function TransactionsPage() {
         <AddTransactionButton />
       </div>
 
-      <DataTable columns={transactionColumns} data={transactions} />
+      <DataTable columns={transactionColumns} data={serializedTransactions} />
     </div>
   );
 }
