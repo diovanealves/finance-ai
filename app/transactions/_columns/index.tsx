@@ -20,7 +20,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "type",
     header: "Tipo",
     cell: ({ row: { original: transaction } }) => {
-      <TransactionTypeBadge transactionType={transaction.type} />;
+      return <TransactionTypeBadge transactionType={transaction.type} />;
     },
   },
   {
@@ -39,7 +39,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "date",
     header: "Data",
     cell: ({ row: { original: transaction } }) => {
-      new Date(transaction.date).toLocaleDateString("pt-BR", {
+      return new Date(transaction.date).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -50,7 +50,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "amount",
     header: "Valor",
     cell: ({ row: { original: transaction } }) => {
-      new Intl.NumberFormat("pt-BR", {
+      return new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
       }).format(Number(transaction.amount));
